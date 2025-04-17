@@ -1,16 +1,29 @@
 # MCP Config Manager
 
-A browser extension for managing MCP server configurations with an intuitive interface.
+A browser extension for managing MCP server configurations with an intuitive interface - designed to solve the common frustrations you face every day.
+
+## 💡 Why MCP Config Manager?
+
+Ever found yourself saying:
+
+- "How do I add this MCP? The JSON is driving me crazy!"
+- "I have so many MCPs in my system, I can't tell which is which!"
+- "Why is it so complicated to delete an MCP?"
+- "Why do my commands always fail on Windows? I need Mac-to-Windows format conversion!"
+
+MCP Config Manager was built specifically to solve these pain points. No more struggling with complex JSON formats, disorganized configurations, or cross-platform compatibility issues.
 
 ## ✨ Features
 
-- 🚀 Easy server configuration management
-- 💻 Cross-platform support for Windows & Mac
-- 🔄 JSON validation and formatting
+- 🚀 Easy server configuration management without JSON headaches
+- 💻 One-click cross-platform support for Windows & Mac
+- 🔄 Automatic JSON validation and formatting
 - 🌐 Multi-language support (English & Chinese)
 - 📋 One-click configuration copying
-- 🎨 Modern and intuitive UI
+- 🔄 Enable/disable servers with simple toggles
+- 🎨 Modern and intuitive UI that even non-technical users can understand
 - 💾 Browser storage for persistent configurations
+- 🔒 All data stays local - complete privacy protection
 
 ## 📥 Installation
 
@@ -48,11 +61,8 @@ The MCP server configuration should follow this format:
       "command": "npx",
       "args": [
         "-y",
-        "mcprouter"
-      ],
-      "env": {
-        "SERVER_KEY": "your_key_here"
-      }
+        "@sinco-lab/mcp-youtube-transcript"
+      ]
     }
   }
 }
