@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "MCP Server Manager",
+    "description": "The name of the extension."
+  },
+  "appDesc": {
+    "message": "Simple and effective MCP server configuration management tool",
+    "description": "The description of the extension."
+  },
+  "confirmDialog": {
+    "message": "MCP Server Manager Confirmation",
+    "description": "The title of confirmation dialogs."
+  }
+} 

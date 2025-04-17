@@ -1,0 +1,493 @@
+/* Custom Styles */
+
+/* Basic Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  width: 400px;
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Input and Button Style Enhancements */
+input, textarea, button {
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+button {
+  font-weight: 500;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Animation Effects */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Server List Item */
+.server-item {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #1e293b;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.server-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Server Status Toggle Switch Styles */
+.server-toggle-container {
+  display: flex !important; 
+  align-items: center;
+  z-index: 20;
+  position: relative;
+  margin-right: 5px;
+}
+
+.toggle-bg {
+  position: relative;
+  transition: all 0.3s cubic-bezier(.44,.09,.46,.84);
+  background-color: #80858f; /* 调亮的深色背景 */
+  border: none;
+  border-radius: 999px; /* Ensure it's oval */
+  width: 44px !important;
+  height: 24px !important;
+}
+
+.toggle-bg.bg-blue-500 {
+  background-color: #4c7bf3; /* Blue background for enabled state */
+  border: none;
+}
+
+.toggle-dot {
+  transition: all 0.3s cubic-bezier(.44,.09,.46,.84);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 50%; /* Ensure it's circular */
+  width: 18px !important;
+  height: 18px !important;
+  background-color: white;
+  top: 3px !important;
+  left: 3px !important;
+}
+
+.toggle-dot.translate-x-6 {
+  transform: translateX(20px);
+}
+
+.server-toggle-container input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.server-toggle-container input[type="checkbox"] + .toggle-bg {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.server-toggle-container input[type="checkbox"]:checked + .toggle-bg {
+  background-color: #4c7bf3;
+}
+
+.server-toggle-container input[type="checkbox"]:checked ~ .toggle-dot {
+  transform: translateX(20px);
+}
+
+/* JSON Formatted Display */
+pre {
+  background-color: #111827;
+  color: #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  overflow: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Syntax Highlighting Enhancement */
+.json-key {
+  color: #60a5fa;
+}
+
+.json-string {
+  color: #34d399;
+}
+
+.json-number {
+  color: #f97316;
+}
+
+.json-boolean {
+  color: #8b5cf6;
+}
+
+.json-null {
+  color: #ef4444;
+}
+
+/* Button Shine Effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Input Hover Effect */
+input:hover, textarea:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Server Status Indicator */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-enabled {
+  background-color: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.status-disabled {
+  background-color: #6b7280;
+}
+
+/* Modal Background Blur */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+/* Tooltip Message Styles */
+#jsonStatus, #editJsonStatus {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  position: relative;
+  word-break: break-word;
+  line-height: 1.4;
+  min-height: 20px;
+  max-width: 100%;
+}
+
+.text-valid {
+  color: #10b981;
+}
+
+.text-invalid {
+  color: #ef4444;
+  font-size: 0.875rem;
+  max-width: 100%;
+  line-height: 1.4;
+}
+
+/* Ensure tooltip does not exceed the right boundary */
+.status-container:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1E293B;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  font-size: 12px;
+  white-space: normal;
+  max-width: 250px;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  word-wrap: break-word;
+}
+
+/* Ensure code snippets can scroll horizontally */
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Server Details Styles */
+.server-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.server-details.hidden {
+  max-height: 0;
+}
+
+.server-details:not(.hidden) {
+  max-height: 1000px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.server-header:hover {
+  background-color: #1a2234;
+}
+
+/* Toolbar Buttons */
+.btn-action {
+  transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+  transform: translateY(-2px);
+}
+
+/* Dropdown Button Style Enhancement */
+.toggle-details {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: #c5c9d6;
+  transition: all 0.2s ease;
+}
+
+.toggle-details:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.toggle-details:active {
+  transform: translateY(0);
+}
+
+.toggle-details i {
+  font-size: 24px;
+}
+
+/* Fixed Button Width and Title Style - Using ID selector to avoid affecting events */
+#copyAllBtn, #addServerBtn, #deleteAllBtn {
+  width: 72px !important; /* Completely fixed width */
+  height: 26px !important; /* Fixed height */
+  padding: 0 6px !important; /* Uniform padding */
+  justify-content: flex-start !important; /* Left-align content */
+  box-sizing: border-box !important; /* Ensure consistent box model */
+  overflow: hidden !important; /* Prevent content overflow */
+  position: relative !important; /* Prepare for absolute positioning of icon */
+}
+
+/* Set fixed position for each button icon */
+#copyAllBtn i, #addServerBtn i, #deleteAllBtn i {
+  width: 16px !important;
+  height: 16px !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute !important;
+  left: 8px !important; /* Fixed position */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Uniform button text style and position */
+#copyAllBtn span, #addServerBtn span, #deleteAllBtn span {
+  font-size: 12px !important;
+  line-height: 1 !important;
+  position: absolute !important;
+  left: 28px !important; /* Text position fixed */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+#windowsBtn, #macBtn {
+  width: 65px !important;
+  justify-content: center !important;
+}
+
+#windowsBtn i, #macBtn i {
+  width: 16px !important;
+  display: inline-block !important;
+  text-align: center !important;
+}
+
+h1 {
+  min-width: 150px !important;
+  line-height: 1.2 !important;
+}
+
+/* Fixed title and list height */
+section h2 {
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  margin-bottom: 16px !important;
+  padding-left: 2px !important;
+}
+
+/* Fixed config example area style */
+.p-4.rounded-2xl.bg-\[\#1e293b\].shadow-lg.animate-fadeIn {
+  min-height: 300px !important;
+}
+
+/* Fixed config example title row height */
+.p-4.rounded-2xl.bg-\[\#1e293b\].shadow-lg.animate-fadeIn .flex.items-center.justify-between.mb-4 {
+  height: 30px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Fixed config example title text style - More general selector */
+.p-4.rounded-2xl.bg-\[\#1e293b\].shadow-lg.animate-fadeIn p.text-lg {
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  min-width: 200px !important;
+}
+
+/* Config example template tag */
+.p-4.rounded-2xl.bg-\[\#1e293b\].shadow-lg.animate-fadeIn .bg-blue-500.bg-opacity-20 {
+  min-width: 80px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+/* Fixed example tip text height */
+.p-4.rounded-2xl.bg-\[\#1e293b\].shadow-lg.animate-fadeIn .text-gray-400.text-xs.flex.items-center.mt-4 {
+  height: 20px !important;
+  margin-top: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+}
+
+/* Example tip text font size */
+.text-gray-400.text-xs span {
+  font-size: 0.7rem !important; /* Reduce font size */
+}
+
+/* Fixed footer text to display on one line */
+footer p.text-gray-500.text-xs {
+  white-space: nowrap !important;
+  overflow: visible !important; /* Ensure text is visible, not truncated */
+  text-overflow: clip !important; /* Remove ellipsis effect */
+  max-width: none !important; /* Don't limit width */
+  margin: 0 auto !important; /* Center display */
+  padding: 0 10px 36px 10px !important; /* Keep padding */
+  text-align: center !important; /* Center align */
+  font-size: 0.76rem !important; /* Increase font size */
+  letter-spacing: -0.3px !important; /* Reduce letter spacing */
+}
+
+/* Only show full footer text in English interface */
+body[lang="en"] footer p.text-gray-500.text-xs {
+  font-size: 0.65rem !important; /* Smaller font in English mode */
+  letter-spacing: -0.3px !important; /* Reduce letter spacing */
+  max-width: none !important; /* Remove max width limit */
+  margin-left: 5px !important; /* Left align */
+  transform: translateX(-40px) !important; /* Move to the left */
+}
+
+/* Copy success toast style */
+#copySuccessToast {
+  white-space: nowrap !important;
+  z-index: 9999 !important; /* Ensure it displays on top */
+}
+
+/* Language switcher button container style */
+#langSwitcher {
+  z-index: 50 !important;
+} 

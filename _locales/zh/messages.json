@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "MCP 服务器管理",
+    "description": "The name of the extension."
+  },
+  "appDesc": {
+    "message": "简单高效的MCP服务器配置管理工具",
+    "description": "The description of the extension."
+  },
+  "confirmDialog": {
+    "message": "MCP 服务器管理提示",
+    "description": "The title of confirmation dialogs."
+  }
+} 

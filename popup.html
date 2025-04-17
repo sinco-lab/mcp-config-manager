@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Server Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0F172A] text-gray-100 p-0 min-h-screen font-sans antialiased">
+    <div class="max-w-md mx-auto px-4 py-6">
+        <!-- Top navigation bar -->
+        <header class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+            <div class="flex items-center">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg mr-3">
+                    <i class="fas fa-server text-white text-lg"></i>
+                </div>
+                <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">
+                    MCP Manager
+                </h1>
+            </div>
+            <div class="flex items-center justify-between gap-1 mt-2 w-full px-1">
+                <!-- Platform switch -->
+                <div class="bg-[#1E293B] rounded-full p-1 flex shadow-lg" role="group">
+                    <button id="windowsBtn" type="button" class="bg-primary text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center">
+                        <i class="fab fa-windows mr-1"></i><span>Win</span>
+                    </button>
+                    <button id="macBtn" type="button" class="text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center">
+                        <i class="fab fa-apple mr-1"></i><span>Mac</span>
+                    </button>
+                </div>
+                <div class="flex items-center gap-1">
+                    <!-- Function buttons -->
+                    <button id="copyAllBtn" class="bg-accent hover:bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium shadow-lg transition-all flex items-center">
+                        <i class="fas fa-copy mr-1"></i><span>Copy</span>
+                    </button>
+                    <button id="addServerBtn" class="bg-secondary hover:bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium shadow-lg transition-all flex items-center">
+                        <i class="fas fa-plus mr-1"></i><span>Add</span>
+                    </button>
+                    <button id="deleteAllBtn" style="background-color: #ef4444;" class="hover:bg-red-700 text-white px-2 py-1 rounded-full text-xs font-medium shadow-lg transition-all flex items-center">
+                        <i class="fas fa-trash-alt mr-1"></i><span>Clear All</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main content area -->
+        <main>
+            <!-- Server list -->
+            <section class="mb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold flex items-center">
+                        <span class="text-primary mr-2">•</span> Server List
+                    </h2>
+                </div>
+                
+                <div id="serverList" class="space-y-4">
+                    <!-- Server list items will be dynamically added via JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-6 text-left">
+            <div class="flex flex-col items-start justify-center pb-4">
+                <p class="text-gray-500 text-xs">MCP Server Management Tool • Simple and efficient configuration solution</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Add Server Modal -->
+    <div id="addServerModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-md">
+        <div class="bg-[#1E293B] rounded-2xl w-full max-w-md shadow-2xl animate-fadeIn overflow-hidden">
+            <div class="bg-gradient-to-r from-primary to-secondary h-1"></div>
+            <div class="p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-white">Add Server</h2>
+                    <button id="closeModalBtn" class="text-gray-200 hover:text-white bg-[#2A3854] hover:bg-[#3B4D6B] border border-gray-500 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label for="serverName" class="block text-sm font-medium text-gray-300 mb-1">Server Name</label>
+                        <input type="text" id="serverName" placeholder="Enter server name, this field can be left blank" 
+                               class="w-full px-3 py-2 bg-[#0F172A] border border-gray-700 text-white rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <p class="text-xs text-gray-400 mt-1">
+                            <i class="fas fa-info-circle mr-1"></i>If you have already specified the server name in the JSON config, this field can be left blank
+                        </p>
+                    </div>
+                    <div>
+                        <label for="jsonConfig" class="block text-sm font-medium text-gray-300 mb-1">JSON Config</label>
+                        <textarea id="jsonConfig" placeholder='{
+  "mcpServers": {
+    "minimax": {
+      "command": "npx",
+      "args": ["-y", "minimax-mcp"],
+      "env": {
+        "API_KEY": "your-key-here"
+      }
+    }
+  }
+}' 
+                                  class="w-full px-3 py-2 bg-[#0F172A] border border-gray-700 text-white rounded-xl h-40 font-mono focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        <p class="text-xs text-gray-400 mt-1">
+                            <i class="fas fa-lightbulb mr-1"></i>Supports multiple formats: full mcpServers format, server object only, or config containing multiple servers
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <button id="validateJsonBtn" class="bg-[#334155] hover:bg-[#475569] text-white px-3 py-1 rounded-xl text-sm font-medium transition-all flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i>Validate JSON
+                        </button>
+                        <div class="status-container" data-tooltip="">
+                            <span id="jsonStatus" class="text-sm block"></span>
+                        </div>
+                    </div>
+                    <button id="saveServerBtn" class="bg-primary hover:bg-blue-600 text-white px-3 py-2 rounded-xl text-sm font-medium w-full transition-all flex items-center justify-center">
+                        <i class="fas fa-save mr-2"></i>Save Server
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Server Modal -->
+    <div id="editServerModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-md">
+        <div class="bg-[#1E293B] rounded-2xl w-full max-w-md shadow-2xl animate-fadeIn overflow-hidden">
+            <div class="bg-gradient-to-r from-primary to-secondary h-1"></div>
+            <div class="p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-white">Edit Server</h2>
+                    <button id="closeEditModalBtn" class="text-gray-200 hover:text-white bg-[#2A3854] hover:bg-[#3B4D6B] border border-gray-500 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label for="editServerName" class="block text-sm font-medium text-gray-300 mb-1">Server Name</label>
+                        <input type="text" id="editServerName" placeholder="Enter server name, this field can be left blank" 
+                               class="w-full px-3 py-2 bg-[#0F172A] border border-gray-700 text-white rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <input type="hidden" id="editServerId">
+                        <p class="text-xs text-gray-400 mt-1">
+                            <i class="fas fa-info-circle mr-1"></i>If you have specified the server name in the JSON config, it will be updated automatically
+                        </p>
+                    </div>
+                    <div>
+                        <label for="editJsonConfig" class="block text-sm font-medium text-gray-300 mb-1">JSON Config</label>
+                        <textarea id="editJsonConfig" placeholder='{
+  "command": "npx",
+  "args": ["-y", "minimax-mcp"],
+  "env": {
+    "API_KEY": "your-key-here"
+  }
+}' 
+                                  class="w-full px-3 py-2 bg-[#0F172A] border border-gray-700 text-white rounded-xl h-40 font-mono focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        <p class="text-xs text-gray-400 mt-1">
+                            <i class="fas fa-lightbulb mr-1"></i>Supports multiple formats: full mcpServers format, server object only, or single server config
+                        </p>
+                    </div>
+                    <div class="space-y-2">
+                        <button id="validateEditJsonBtn" class="bg-[#334155] hover:bg-[#475569] text-white px-3 py-1 rounded-xl text-sm font-medium transition-all flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i>Validate JSON
+                        </button>
+                        <div class="status-container" data-tooltip="">
+                            <span id="editJsonStatus" class="text-sm block"></span>
+                        </div>
+                    </div>
+                    <button id="updateServerBtn" class="bg-primary hover:bg-blue-600 text-white px-3 py-2 rounded-xl text-sm font-medium w-full transition-all flex items-center justify-center">
+                        <i class="fas fa-save mr-2"></i>Update Server
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copy Success Toast -->
+    <div id="copySuccessToast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-accent text-white px-4 py-2 rounded-xl shadow-2xl translate-y-10 opacity-0 transition-all duration-300 z-50 flex items-center">
+        <i class="fas fa-check-circle mr-2"></i>Copied to clipboard
+    </div>
+
+    <!-- Language Switch Buttons -->
+    <div class="fixed bottom-4 right-4 bg-[#1E293B] rounded-full p-1 flex shadow-lg" role="group">
+        <button id="langZhBtn" type="button" class="text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center">
+            <span>中文</span>
+        </button>
+        <button id="langEnBtn" type="button" class="text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center">
+            <span>English</span>
+        </button>
+    </div>
+
+    <script src="tailwind.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
