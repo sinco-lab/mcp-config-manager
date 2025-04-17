@@ -274,15 +274,12 @@ function renderServerList() {
         // Create example of correct config item format
         const configItemStr = `{` +
 `\n  "mcpServers": {` +
-`\n    "github": {` +
+`\n    "youtube-transcript": {` +
 `\n      "command": "npx",` +
 `\n      "args": [` +
 `\n        "-y",` +
-`\n        "mcprouter"` +
-`\n      ],` +
-`\n      "env": {` +
-`\n        "SERVER_KEY": "yssu48c"` +
-`\n      }` +
+`\n        "@sinco-lab/mcp-youtube-transcript"` +
+`\n      ]` +
 `\n    }` +
 `\n  }` +
 `\n}`; // Keep formatting as multiline string
@@ -902,12 +899,12 @@ function updateLanguageButtons() {
     if (!zhBtn || !enBtn) return;
     
     if (currentLanguage === 'zh') {
-        zhBtn.className = 'bg-primary text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center';
-        enBtn.className = 'text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center';
+        zhBtn.className = 'bg-primary text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center justify-center w-16';
+        enBtn.className = 'text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center justify-center w-16';
         document.body.lang = 'zh'; // Update body lang attribute
     } else {
-        zhBtn.className = 'text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center';
-        enBtn.className = 'bg-primary text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center';
+        zhBtn.className = 'text-gray-400 text-opacity-70 px-2 py-1 text-xs font-medium rounded-full hover:bg-[#334155] hover:text-white transition-all flex items-center justify-center w-16';
+        enBtn.className = 'bg-primary text-white px-2 py-1 text-xs font-medium rounded-full transition-all flex items-center justify-center w-16';
         document.body.lang = 'en'; // Update body lang attribute
     }
 }
@@ -955,11 +952,11 @@ function copyToClipboard(text) {
 
 // Show copy success toast
 function showCopySuccessToast() {
-    copySuccessToast.style.transform = 'translateY(0) translateX(-50%)';
+    copySuccessToast.style.transform = 'translateY(0)';
     copySuccessToast.style.opacity = '1';
     
     setTimeout(() => {
-        copySuccessToast.style.transform = 'translateY(10px) translateX(-50%)';
+        copySuccessToast.style.transform = 'translateY(10px)';
         copySuccessToast.style.opacity = '0';
     }, 2000);
 }
